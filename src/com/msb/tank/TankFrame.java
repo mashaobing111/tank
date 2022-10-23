@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankFrame extends Frame {
+    int x = 200, y = 200;
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小
         setSize(800,600);
@@ -32,6 +33,10 @@ public class TankFrame extends Frame {
     //在窗口内画一个黑方块
     @Override
     public void paint(Graphics g) {
-        g.fillRect(200,200,70,50);
+        System.out.println("paint");
+        //坐标改为变量 每次调用就可移动
+        g.fillRect(x,y,70,50);
+        x += 10;
+        y += 10;
     }
 }

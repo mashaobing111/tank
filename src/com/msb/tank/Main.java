@@ -10,7 +10,7 @@ import java.awt.event.WindowEvent;
  * @description: com.msb.tank
  * @version: 1.0
  */
-public class T {
+public class Main {
     public static void main(String[] args) {
         TankFrame tf = new TankFrame();
 
