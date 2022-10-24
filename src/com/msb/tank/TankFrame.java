@@ -1,6 +1,8 @@
 package com.msb.tank;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -22,6 +24,8 @@ public class TankFrame extends Frame {
         //设置可见
         setVisible(true);
 
+        //添加键盘监听
+        this.addKeyListener(new MyKeyListener());
         //点击X关闭窗口的
         addWindowListener(new WindowAdapter() {
             @Override
@@ -33,10 +37,20 @@ public class TankFrame extends Frame {
     //在窗口内画一个黑方块
     @Override
     public void paint(Graphics g) {
-        System.out.println("paint");
-        //坐标改为变量 每次调用就可移动
-        g.fillRect(x,y,70,50);
-        x += 10;
-        y += 10;
+
+
+    }
+    //创建内部类   ：如果只有TankFrame类使用  就创建内部类即可
+    class MyKeyListener extends KeyAdapter{
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.println("key pressed");
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.println("key released");
+        }
     }
 }
