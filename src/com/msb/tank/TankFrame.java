@@ -13,11 +13,8 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankFrame extends Frame {
-    int x = 200, y = 200;
-    //没类初始方向
-    Dir dir=Dir.UP;
-    //定义坦克速度
-    final int SPEED = 10;
+
+    Tank myTank = new Tank(200,200,Dir.DOWN);
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小
         setSize(800,600);
@@ -38,35 +35,13 @@ public class TankFrame extends Frame {
             }
         });
     }
-    //在窗口内画一个黑方块
+
+    //在窗口内创建一个坦克
     @Override
     public void paint(Graphics g) {
-
-        g.fillRect(x,y,50,50);
-        //根据坦克的方向移动
-        switch (dir){
-            case UP:
-                y -= SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            case LEFT:
-                x -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            default:
-                break;
-        }
-
-
-
-        //x += 10;
-        //y += 10;
-
+        myTank.paint(g);
     }
+
     //创建内部类   ：如果只有TankFrame类使用  就创建内部类即可
     //键盘监听器
     class MyKeyListener extends KeyAdapter{
@@ -122,10 +97,10 @@ public class TankFrame extends Frame {
         }
         //根据按键设置坦克的方向
         private void setMainTankDir() {
-         if (bw) dir = Dir.UP;
-         if (bs) dir = Dir.DOWN;
-         if (ba) dir = Dir.LEFT;
-         if (bd) dir = Dir.RIGHT;
+         if (bw) myTank.setDir(Dir.UP);
+         if (bs) myTank.setDir(Dir.DOWN);
+         if (ba) myTank.setDir(Dir.LEFT);
+         if (bd) myTank.setDir(Dir.RIGHT);
         }
     }
 }
