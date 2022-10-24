@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200,200,Dir.DOWN);
+    Bullet b = new Bullet(300,300,Dir.DOWN);
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小
         setSize(800,600);
@@ -40,6 +41,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
+        b.paint(g);
     }
 
     //创建内部类   ：如果只有TankFrame类使用  就创建内部类即可
