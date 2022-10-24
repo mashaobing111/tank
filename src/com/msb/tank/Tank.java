@@ -16,6 +16,17 @@ public class Tank {
     //坦克的速度
     private static final int SPEED = 10;
 
+    //坦克的移动状态
+    private boolean moving = false;
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
     public Tank(int x, int y, Dir dir) {
         this.x = x;
         this.y = y;
@@ -23,8 +34,16 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        //创建一个填充矩形
         g.fillRect(x,y,50,50);
         //根据坦克的方向移动
+        move();
+
+    }
+    //移动方法
+    private void move(){
+        //如果移动状态为false 则跳出
+        if (!moving) return;
         switch (dir){
             case UP:
                 y -= SPEED;

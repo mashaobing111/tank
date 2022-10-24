@@ -95,12 +95,19 @@ public class TankFrame extends Frame {
             }
             setMainTankDir();
         }
-        //根据按键设置坦克的方向
+        //根据按键设置坦克的方向和移动
         private void setMainTankDir() {
-         if (bw) myTank.setDir(Dir.UP);
-         if (bs) myTank.setDir(Dir.DOWN);
-         if (ba) myTank.setDir(Dir.LEFT);
-         if (bd) myTank.setDir(Dir.RIGHT);
+            //判断是否在移动
+            if(!bw && !bs && !ba && !bd){
+                myTank.setMoving(false);
+            }else {
+                myTank.setMoving(true);
+
+                if (bw) myTank.setDir(Dir.UP);
+                if (bs) myTank.setDir(Dir.DOWN);
+                if (ba) myTank.setDir(Dir.LEFT);
+                if (bd) myTank.setDir(Dir.RIGHT);
+            }
         }
     }
 }
