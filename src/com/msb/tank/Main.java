@@ -11,17 +11,13 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        //创建窗口对象
         TankFrame tf = new TankFrame();
-
-        while(true){
-            try {
-                Thread.sleep(50);
-               // tf.repaint();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
+        while (true){
+            //睡眠50ms
+            Thread.sleep(50);
+            //重新调用paint方法
+            tf.repaint();}
     }
 }

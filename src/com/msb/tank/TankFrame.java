@@ -14,6 +14,10 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
     int x = 200, y = 200;
+    //没类初始方向
+    Dir dir=Dir.UP;
+    //定义坦克速度
+    final int SPEED = 10;
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小
         setSize(800,600);
@@ -39,6 +43,25 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
 
         g.fillRect(x,y,50,50);
+        //根据坦克的方向移动
+        switch (dir){
+            case UP:
+                y -= SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+            case LEFT:
+                x -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            default:
+                break;
+        }
+
+
 
         //x += 10;
         //y += 10;
@@ -71,10 +94,9 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            repaint();
-            //x += 10;
-            //repaint();
+            setMainTankDir();
         }
+
 
         //松开键盘任意按键调用
         @Override
@@ -96,7 +118,14 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            repaint();
+            setMainTankDir();
+        }
+        //根据按键设置坦克的方向
+        private void setMainTankDir() {
+         if (bw) dir = Dir.UP;
+         if (bs) dir = Dir.DOWN;
+         if (ba) dir = Dir.LEFT;
+         if (bd) dir = Dir.RIGHT;
         }
     }
 }
