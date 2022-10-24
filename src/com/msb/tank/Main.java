@@ -17,7 +17,7 @@ public class Main {
         while(true){
             try {
                 Thread.sleep(50);
-                tf.repaint();
+               // tf.repaint();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

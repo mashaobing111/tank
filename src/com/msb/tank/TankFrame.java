@@ -37,20 +37,41 @@ public class TankFrame extends Frame {
     //在窗口内画一个黑方块
     @Override
     public void paint(Graphics g) {
-        System.out.println("paint");
+
         g.fillRect(x,y,50,50);
 
-        x += 10;
+        //x += 10;
         //y += 10;
 
     }
     //创建内部类   ：如果只有TankFrame类使用  就创建内部类即可
     //键盘监听器
     class MyKeyListener extends KeyAdapter{
+        boolean bw = false;
+        boolean bs = false;
+        boolean ba = false;
+        boolean bd = false;
         //按下键盘任意按键 调用
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("key pressed");
+            int key = e.getKeyCode();
+            switch (key){
+                case KeyEvent.VK_W:
+                    bw = true;
+                    break;
+                case KeyEvent.VK_S:
+                    bs = true;
+                    break;
+                case KeyEvent.VK_A:
+                    ba = true;
+                    break;
+                case KeyEvent.VK_D:
+                    bd = true;
+                    break;
+                default:
+                    break;
+            }
+            repaint();
             //x += 10;
             //repaint();
         }
@@ -58,7 +79,24 @@ public class TankFrame extends Frame {
         //松开键盘任意按键调用
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("key released");
+            int key = e.getKeyCode();
+            switch (key){
+                case KeyEvent.VK_W:
+                    bw = false;
+                    break;
+                case KeyEvent.VK_S:
+                    bs = false;
+                    break;
+                case KeyEvent.VK_A:
+                    ba = false;
+                    break;
+                case KeyEvent.VK_D:
+                    bd = false;
+                    break;
+                default:
+                    break;
+            }
+            repaint();
         }
     }
 }
