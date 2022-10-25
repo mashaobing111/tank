@@ -16,9 +16,11 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200,200,Dir.DOWN);
     Bullet b = new Bullet(300,300,Dir.DOWN);
+    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;//定义窗口大小
+
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小
-        setSize(800,600);
+        setSize(GAME_WIDTH,GAME_HEIGHT);
         //窗口是否可调整大小
         setResizable(false);
         //窗口标题
@@ -35,6 +37,20 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+    }
+    //双重缓存解决闪烁问题
+    Image offScreenImage = null;
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null){
+            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage,0,0,null);
     }
 
     //在窗口内创建一个坦克
