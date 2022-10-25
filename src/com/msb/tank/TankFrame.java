@@ -69,8 +69,8 @@ public class TankFrame extends Frame {
         g.setColor(c);
 
         myTank.paint(g);//绘制坦克
-        for (Bullet b :bullets){//遍历绘制子弹
-            b.paint(g);
+        for (int i = 0; i <bullets.size() ; i++) {
+            bullets.get(i).paint(g);
         }
     }
 
