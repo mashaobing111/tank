@@ -9,19 +9,26 @@ import java.awt.*;
  * @version: 1.0
  */
 public class Bullet {
-    private int x, y;
-    private Dir dir;
-    private static final int SPEED = 10;
-    private static final int WIDTH = 10, HEIGHT = 10;
-    public Bullet(int x, int y, Dir dir) {
+    private int x, y;//子弹位置
+    private Dir dir;//子弹方向
+    private static final int SPEED = 10;//子弹速度
+    private static final int WIDTH = 10, HEIGHT = 10;//子弹大小
+    private boolean live = true;//子弹状态
+    TankFrame tf = null;
+    public Bullet(int x, int y, Dir dir,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
     public void paint(Graphics g){
+        if (!live){//子弹消亡就移除
+            tf.bullets.remove(this);
+        }
+
         Color c = g.getColor();
         g.setColor(Color.red);
-        g.fillOval(x,y,WIDTH,HEIGHT);
+        g.fillOval(x,y,WIDTH,HEIGHT);//绘制子弹
         g.setColor(c);
 
         move();
@@ -43,5 +50,6 @@ public class Bullet {
             default:
                 break;
         }
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) live = false;//设置边界 判断子弹是否超出边界
     }
 }

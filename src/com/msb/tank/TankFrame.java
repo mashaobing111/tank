@@ -5,6 +5,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: msb
@@ -15,7 +18,10 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200,200,Dir.DOWN,this);
-    Bullet b = new Bullet(300,300,Dir.DOWN);
+    //创建子弹集合
+    List<Bullet> bullets = new ArrayList<>();
+    Bullet b = null;
+
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;//定义窗口大小
 
     public TankFrame() throws HeadlessException {
@@ -56,8 +62,16 @@ public class TankFrame extends Frame {
     //在窗口内创建一个坦克
     @Override
     public void paint(Graphics g) {
-        myTank.paint(g);
-        b.paint(g);
+
+        Color c = g.getColor();//获取子弹的数量
+        g.setColor(Color.white);
+        g.drawString("子弹的数量：" + bullets.size(),10,50);
+        g.setColor(c);
+
+        myTank.paint(g);//绘制坦克
+        for (Bullet b :bullets){//遍历绘制子弹
+            b.paint(g);
+        }
     }
 
     //创建内部类   ：如果只有TankFrame类使用  就创建内部类即可
