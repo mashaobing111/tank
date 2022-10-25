@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -72,6 +73,10 @@ public class TankFrame extends Frame {
         for (int i = 0; i <bullets.size() ; i++) {
             bullets.get(i).paint(g);
         }
+/*        for(Iterator<Bullet> it = bullets.iterator();it.hasNext();){
+            Bullet b = it.next();
+            if(!b.live) it.remove();
+        }*/
     }
 
     //创建内部类   ：如果只有TankFrame类使用  就创建内部类即可

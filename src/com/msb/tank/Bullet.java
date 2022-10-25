@@ -13,7 +13,7 @@ public class Bullet {
     private Dir dir;//子弹方向
     private static final int SPEED = 10;//子弹速度
     private static final int WIDTH = 10, HEIGHT = 10;//子弹大小
-    private boolean live = true;//子弹状态
+    private  boolean live = true;//子弹状态
     TankFrame tf = null;
     public Bullet(int x, int y, Dir dir,TankFrame tf) {
         this.x = x;
