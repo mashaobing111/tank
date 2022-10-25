@@ -15,9 +15,10 @@ public class Tank {
     private Dir dir = Dir.DOWN;
     //坦克的速度
     private static final int SPEED = 10;
-
     //坦克的移动状态
     private boolean moving = false;
+    //引用TankFrame
+    private TankFrame tf = null;
 
     public boolean isMoving() {
         return moving;
@@ -27,10 +28,11 @@ public class Tank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir) {
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void paint(Graphics g) {
@@ -71,5 +73,10 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+    }
+
+    //坦克开火打出子弹
+    public void fire() {
+        tf.b = new Bullet(this.x + 25, this.y + 25, this.dir);
     }
 }
