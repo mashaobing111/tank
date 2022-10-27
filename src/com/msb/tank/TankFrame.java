@@ -9,6 +9,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * @author: msb
@@ -69,6 +70,7 @@ public class TankFrame extends Frame {
         Color c = g.getColor();//获取子弹的数量
         g.setColor(Color.white);
         g.drawString("子弹的数量：" + bullets.size(),10,50);
+        g.drawString("敌人的数量：" + tanks.size(),10,70);
         g.setColor(c);
 
         myTank.paint(g);//绘制坦克
@@ -79,6 +81,13 @@ public class TankFrame extends Frame {
             tanks.get(i).paint(g);
         }
 
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < tanks.size(); j++) {
+                bullets.get(i).collideWith(tanks.get(j));
+
+            }
+
+        }
 /*        for(Iterator<Bullet> it = bullets.iterator();it.hasNext();){
             Bullet b = it.next();
             if(!b.live) it.remove();

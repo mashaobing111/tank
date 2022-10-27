@@ -19,6 +19,8 @@ public class Tank {
     public static int WIDTH = ResourceMgr.tankU.getWidth(), HEIGHT = ResourceMgr.tankU.getHeight();
     //坦克的移动状态
     private boolean moving = false;
+
+    private boolean living = true;
     //引用TankFrame
     private TankFrame tf = null;
 
@@ -38,6 +40,9 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if(!living) {
+            tf.tanks.remove(this);
+        }
         //根据方向换出坦克：
         switch (dir){
             case UP:
@@ -94,5 +99,25 @@ public class Tank {
         int bx = this.x + ((WIDTH - Bullet.WIDTH)/2);
         int by = this.y + ((HEIGHT - Bullet.HEIGHT)/2);
         tf.bullets.add(new Bullet(bx, by, this.dir,this.tf));
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void die() {
+        this.living = false;
     }
 }

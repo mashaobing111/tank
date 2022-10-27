@@ -13,7 +13,7 @@ public class Bullet {
     private Dir dir;//子弹方向
     private static final int SPEED = 15;//子弹速度
     public static int WIDTH = ResourceMgr.bulletU.getWidth(), HEIGHT = ResourceMgr.bulletU.getHeight();//子弹大小
-    private  boolean live = true;//子弹状态
+    private  boolean living = true;//子弹状态
     TankFrame tf = null;
     public Bullet(int x, int y, Dir dir,TankFrame tf) {
         this.x = x;
@@ -22,7 +22,7 @@ public class Bullet {
         this.tf = tf;
     }
     public void paint(Graphics g){
-        if (!live){//子弹消亡就移除
+        if (!living){//子弹消亡就移除
             tf.bullets.remove(this);
         }
 
@@ -63,6 +63,19 @@ public class Bullet {
             default:
                 break;
         }
-        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) live = false;//设置边界 判断子弹是否超出边界
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;//设置边界 判断子弹是否超出边界
+    }
+
+    public void collideWith(Tank tank) {
+        Rectangle rect1 = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
+        if (rect1.intersects(rect2)){
+            tank.die();
+            this.die();
+        }
+    }
+
+    private void die() {
+        this.living = false;
     }
 }
