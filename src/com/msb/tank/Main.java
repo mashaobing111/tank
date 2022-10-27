@@ -14,6 +14,12 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         //创建窗口对象
         TankFrame tf = new TankFrame();
+
+        //创建敌方坦克：
+        for (int i = 0; i < 5; i++) {
+            tf.tanks.add(new Tank(50 + i *100, 200,Dir.DOWN,tf));
+        }
+
         while (true){
             //睡眠50ms
             Thread.sleep(50);

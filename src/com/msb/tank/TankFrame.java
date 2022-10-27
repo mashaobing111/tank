@@ -18,9 +18,11 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200,200,Dir.DOWN,this);
+    Tank myTank = new Tank(200,530,Dir.UP,this);
     //创建子弹集合
     List<Bullet> bullets = new ArrayList<>();
+    //创建敌方坦克集合
+    List<Tank> tanks = new ArrayList<>();
     Bullet b = null;
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;//定义窗口大小
@@ -71,8 +73,12 @@ public class TankFrame extends Frame {
 
         myTank.paint(g);//绘制坦克
         for (int i = 0; i <bullets.size() ; i++) {
-            bullets.get(i).paint(g);
+            bullets.get(i).paint(g);//绘制子弹
         }
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
+        }
+
 /*        for(Iterator<Bullet> it = bullets.iterator();it.hasNext();){
             Bullet b = it.next();
             if(!b.live) it.remove();
