@@ -36,12 +36,24 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        Color c = g.getColor();//获取老的颜色
-        g.setColor(Color.yellow);//设置颜色
-        //创建一个填充矩形
-        g.fillRect(x,y,50,50);
-        //根据坦克的方向移动
-        g.setColor(c);
+        //根据方向换出坦克：
+        switch (dir){
+            case UP:
+                g.drawImage(ResourceMgr.tankU, x, y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD, x, y,null);
+                break;
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL, x, y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR, x, y,null);
+                break;
+            default:
+                break;
+        }
+
         move();
 
     }

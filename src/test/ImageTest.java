@@ -1,4 +1,4 @@
-package com.msb.test;
+package test;
 
 
 import org.junit.jupiter.api.Assertions;
@@ -22,8 +22,10 @@ class ImageTest {
     void test(){
         try {
             //获取本地的图片
-            BufferedImage image = ImageIO.read(new File("C:/Users/马少兵/Pictures/Saved Pictures/春日野穹.jpg"));
-            Assertions.assertNotNull(image);
+            /*BufferedImage image = ImageIO.read(new File("C:/Users/马少兵/Pictures/Saved Pictures/群邮件.jpg"));
+            Assertions.assertNotNull(image);*/
+            BufferedImage images = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
+            Assertions.assertNotNull(images);
         } catch (IOException e) {
             e.printStackTrace();
         }
