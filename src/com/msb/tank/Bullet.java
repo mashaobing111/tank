@@ -11,8 +11,8 @@ import java.awt.*;
 public class Bullet {
     private int x, y;//子弹位置
     private Dir dir;//子弹方向
-    private static final int SPEED = 10;//子弹速度
-    private static final int WIDTH = 10, HEIGHT = 10;//子弹大小
+    private static final int SPEED = 15;//子弹速度
+    public static int WIDTH = ResourceMgr.bulletU.getWidth(), HEIGHT = ResourceMgr.bulletU.getHeight();//子弹大小
     private  boolean live = true;//子弹状态
     TankFrame tf = null;
     public Bullet(int x, int y, Dir dir,TankFrame tf) {
@@ -28,7 +28,7 @@ public class Bullet {
 
         switch (dir){
             case UP:
-                g.drawImage(ResourceMgr.bulletU,x,y,null);
+                g.drawImage(ResourceMgr.bulletU,x ,y,null);
                 break;
             case DOWN:
                 g.drawImage(ResourceMgr.bulletD,x,y,null);

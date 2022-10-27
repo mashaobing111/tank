@@ -14,7 +14,9 @@ public class Tank {
     //坦克的初始方向
     private Dir dir = Dir.DOWN;
     //坦克的速度
-    private static final int SPEED = 10;
+    private static final int SPEED = 5;
+    //坦克的大小
+    public static int WIDTH = ResourceMgr.tankU.getWidth(), HEIGHT = ResourceMgr.tankU.getHeight();
     //坦克的移动状态
     private boolean moving = false;
     //引用TankFrame
@@ -89,6 +91,8 @@ public class Tank {
 
     //坦克开火打出子弹
     public void fire() {
-        tf.bullets.add(new Bullet(this.x, this.y, this.dir,this.tf));
+        int bx = this.x + ((WIDTH - Bullet.WIDTH)/2);
+        int by = this.y + ((HEIGHT - Bullet.HEIGHT)/2);
+        tf.bullets.add(new Bullet(bx, by, this.dir,this.tf));
     }
 }
