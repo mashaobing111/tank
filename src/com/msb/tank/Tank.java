@@ -120,4 +120,13 @@ public class Tank {
     public void die() {
         this.living = false;
     }
+
+    public void collideWith(Tank tank) {
+        Rectangle rect1 =new Rectangle(this.x,this.y,WIDTH,HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.x,tank.y,WIDTH,HEIGHT);
+        if (rect1.intersects(rect2)){
+            this.die();
+            tank.die();
+        }
+    }
 }

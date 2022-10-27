@@ -88,6 +88,10 @@ public class TankFrame extends Frame {
             }
 
         }
+        for (int i = 0; i <tanks.size() ; i++) {
+            myTank.collideWith(tanks.get(i));
+
+        }
 /*        for(Iterator<Bullet> it = bullets.iterator();it.hasNext();){
             Bullet b = it.next();
             if(!b.live) it.remove();
