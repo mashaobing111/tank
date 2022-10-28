@@ -19,7 +19,7 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200,530,Dir.UP,this);
+    Tank myTank = new Tank(200,530,Dir.UP,Group.GOOD,this);
     //创建子弹集合
     List<Bullet> bullets = new ArrayList<>();
     //创建敌方坦克集合

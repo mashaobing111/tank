@@ -1,6 +1,7 @@
 package com.msb.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @author: msb
@@ -14,13 +15,16 @@ public class Tank {
     //坦克的初始方向
     private Dir dir = Dir.DOWN;
     //坦克的速度
-    private static final int SPEED = 5;
+    private static final int SPEED = 1;
     //坦克的大小
     public static int WIDTH = ResourceMgr.tankU.getWidth(), HEIGHT = ResourceMgr.tankU.getHeight();
     //坦克的移动状态
     private boolean moving = false;
-
+    //创建随机数对象
+    private Random random = new Random();
+    //坦克生存状态
     private boolean living = true;
+    private Group group = Group.BAD;
     //引用TankFrame
     private TankFrame tf = null;
 
@@ -32,11 +36,12 @@ public class Tank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -67,7 +72,7 @@ public class Tank {
     //移动方法
     private void move(){
         //如果移动状态为false 则跳出
-        if (!moving) return;
+        if (moving) return;
         switch (dir){
             case UP:
                 y -= SPEED;
@@ -84,6 +89,9 @@ public class Tank {
             default:
                 break;
         }
+        if (random.nextInt(10) > 8 ){
+            this.fire();
+        }
     }
 
     public Dir getDir() {
@@ -98,7 +106,7 @@ public class Tank {
     public void fire() {
         int bx = this.x + ((WIDTH - Bullet.WIDTH)/2);
         int by = this.y + ((HEIGHT - Bullet.HEIGHT)/2);
-        tf.bullets.add(new Bullet(bx, by, this.dir,this.tf));
+        tf.bullets.add(new Bullet(bx, by, this.dir,this.group, this.tf));
     }
 
     public int getX() {
@@ -119,6 +127,14 @@ public class Tank {
 
     public void die() {
         this.living = false;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void collideWith(Tank tank) {
