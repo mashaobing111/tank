@@ -21,14 +21,14 @@ public class ResourceMgr {
         try {
             //导入坦克方向
             tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
-            tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
-            tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
-            tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
+            tankD = ImageUtil.rotateImage(tankU,180);
+            tankL = ImageUtil.rotateImage(tankU,-90);
+            tankR = ImageUtil.rotateImage(tankU,90);
             //导入子弹方向：
             bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
-            bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
-            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
-            bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
+            bulletD = ImageUtil.rotateImage(bulletU,180);
+            bulletL = ImageUtil.rotateImage(bulletU,-90);
+            bulletR = ImageUtil.rotateImage(bulletU,90);
             for (int i = 0; i < 9; i++) {
                 explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i+1) +".gif"));
             }

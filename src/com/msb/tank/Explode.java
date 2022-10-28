@@ -12,18 +12,19 @@ public class Explode {
     private int x, y;//爆炸位置
 
     public static int WIDTH = ResourceMgr.explodes[0].getWidth(), HEIGHT = ResourceMgr.explodes[0].getHeight();//爆炸大小
-    private  boolean living = true;//爆炸状态
+
     private  int step = 0;
     TankFrame tf = null;
     public Explode(int x, int y, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.tf = tf;
+//        new Audio("D:\\IDEA_workspace\\tank\\src\\audio/explode.wav").run();
     }
     public void paint(Graphics g){
         g.drawImage(ResourceMgr.explodes[step++],x,y,null);
         if(step >= ResourceMgr.explodes.length){
-            step = 0;
+           tf.explodes.remove(this);
         }
 
     }

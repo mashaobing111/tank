@@ -5,11 +5,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.Writer;
+
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
+
 
 /**
  * @author: msb
@@ -19,14 +19,15 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200,530,Dir.UP,Group.GOOD,this);
+    Tank myTank = new Tank(200,890,Dir.UP,Group.GOOD,this);
     //创建子弹集合
     List<Bullet> bullets = new ArrayList<>();
     //创建敌方坦克集合
     List<Tank> tanks = new ArrayList<>();
-    Explode e = new Explode(100,100,this);
+    //创建坦克爆炸集合
+    List<Explode> explodes = new ArrayList<>();
 
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;//定义窗口大小
+    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;//定义窗口大小
 
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小
@@ -71,17 +72,22 @@ public class TankFrame extends Frame {
         g.setColor(Color.white);
         g.drawString("子弹的数量：" + bullets.size(),10,50);
         g.drawString("敌人的数量：" + tanks.size(),10,70);
+        g.drawString("爆炸的数量：" + explodes.size(),10,90);
         g.setColor(c);
-        e.paint(g);
 
         myTank.paint(g);//绘制坦克
         for (int i = 0; i <bullets.size() ; i++) {
             bullets.get(i).paint(g);//绘制子弹
         }
+        //绘制敌方坦克
         for (int i = 0; i < tanks.size(); i++) {
             tanks.get(i).paint(g);
         }
-
+        //绘制爆炸
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+        }
+        //碰撞检测
         for (int i = 0; i < bullets.size(); i++) {
             for (int j = 0; j < tanks.size(); j++) {
                 bullets.get(i).collideWith(tanks.get(j));
@@ -89,10 +95,7 @@ public class TankFrame extends Frame {
             }
 
         }
-        for (int i = 0; i <tanks.size() ; i++) {
-            myTank.collideWith(tanks.get(i));
 
-        }
 /*        for(Iterator<Bullet> it = bullets.iterator();it.hasNext();){
             Bullet b = it.next();
             if(!b.live) it.remove();

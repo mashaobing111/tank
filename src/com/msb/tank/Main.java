@@ -22,7 +22,7 @@ public class Main {
 
         while (true){
             //睡眠50ms
-            Thread.sleep(50);
+            Thread.sleep(25);
             //重新调用paint方法
             tf.repaint();}
     }

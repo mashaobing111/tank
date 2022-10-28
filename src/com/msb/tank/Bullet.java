@@ -11,7 +11,7 @@ import java.awt.*;
 public class Bullet {
     private int x, y;//子弹位置
     private Dir dir;//子弹方向
-    private static final int SPEED = 15;//子弹速度
+    private static final int SPEED = 10;//子弹速度
     public static int WIDTH = ResourceMgr.bulletU.getWidth(), HEIGHT = ResourceMgr.bulletU.getHeight();//子弹大小
     private  boolean living = true;//子弹状态
     private Group group = Group.BAD;//子弹队伍区分
@@ -76,6 +76,7 @@ public class Bullet {
         if (rect1.intersects(rect2)){
             tank.die();
             this.die();
+            tf.explodes.add(new Explode(x,y,tf));
         }
     }
 

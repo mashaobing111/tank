@@ -72,7 +72,7 @@ public class Tank {
     //移动方法
     private void move(){
         //如果移动状态为false 则跳出
-        if (moving) return;
+        if (!moving) return;
         switch (dir){
             case UP:
                 y -= SPEED;
@@ -136,14 +136,5 @@ public class Tank {
 
     public void setGroup(Group group) {
         this.group = group;
-    }
-
-    public void collideWith(Tank tank) {
-        Rectangle rect1 =new Rectangle(this.x,this.y,WIDTH,HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.x,tank.y,WIDTH,HEIGHT);
-        if (rect1.intersects(rect2)){
-            this.die();
-            tank.die();
-        }
     }
 }
