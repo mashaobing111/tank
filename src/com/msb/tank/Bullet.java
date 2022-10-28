@@ -79,7 +79,7 @@ public class Bullet {
         }
     }
 
-    private void die() {//坦克死亡
+    private void die() {//子弹死亡
         this.living = false;
     }
 
