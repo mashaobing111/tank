@@ -127,6 +127,7 @@ public class Tank {
 
     public void die() {
         this.living = false;
+
     }
 
     public Group getGroup() {

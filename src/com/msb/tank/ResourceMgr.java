@@ -15,6 +15,8 @@ public class ResourceMgr {
     public static BufferedImage tankU, tankD, tankL, tankR;
     //定义子弹方向变量：
     public static BufferedImage bulletU, bulletD, bulletL, bulletR;
+    //定义爆炸数组
+    public static BufferedImage[] explodes = new BufferedImage[9];
     static{
         try {
             //导入坦克方向
@@ -27,7 +29,9 @@ public class ResourceMgr {
             bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
             bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
             bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
-
+            for (int i = 0; i < 9; i++) {
+                explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i+1) +".gif"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
