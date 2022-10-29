@@ -15,7 +15,7 @@ public class Tank {
     //坦克的初始方向
     private Dir dir = Dir.DOWN;
     //坦克的速度
-    private static final int SPEED = 10;
+    private static final int SPEED = 3;
     //坦克的大小
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(), HEIGHT = ResourceMgr.goodTankU.getHeight();
     //坦克的移动状态
