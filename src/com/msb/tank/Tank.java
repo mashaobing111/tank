@@ -72,7 +72,10 @@ public class Tank {
     //移动方法
     private void move(){
         //如果移动状态为false 则跳出
-        if (!moving) return;
+        if (this.group == Group.GOOD){
+            if (!moving) return;
+        }else if (moving) return;
+
         switch (dir){
             case UP:
                 y -= SPEED;
@@ -89,9 +92,15 @@ public class Tank {
             default:
                 break;
         }
-        if (random.nextInt(10) > 8 ){
+        if (this.group == Group.BAD && random.nextInt(100) > 97 ){
             this.fire();
         }
+        if (this.group == Group.BAD && random.nextInt(100) >95)
+        randomDir();
+    }
+    private void randomDir(){
+
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public Dir getDir() {
@@ -104,8 +113,8 @@ public class Tank {
 
     //坦克开火打出子弹
     public void fire() {
-        int bx = this.x + ((WIDTH - Bullet.WIDTH)/2);
-        int by = this.y + ((HEIGHT - Bullet.HEIGHT)/2);
+        int bx = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
+        int by = this.y + HEIGHT /2 - Bullet.HEIGHT / 2;
         tf.bullets.add(new Bullet(bx, by, this.dir,this.group, this.tf));
     }
 
