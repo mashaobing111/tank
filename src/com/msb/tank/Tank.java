@@ -15,7 +15,7 @@ public class Tank {
     //坦克的初始方向
     private Dir dir = Dir.DOWN;
     //坦克的速度
-    private static final int SPEED = 1;
+    private static final int SPEED = 10;
     //坦克的大小
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(), HEIGHT = ResourceMgr.goodTankU.getHeight();
     //坦克的移动状态
@@ -95,7 +95,15 @@ public class Tank {
             this.fire();
         }
         if (this.group == Group.BAD && random.nextInt(100) >95)
-        randomDir();
+            randomDir();
+
+        boundsCheck();
+    }
+    private void boundsCheck(){
+        if (this.x < 2) this.x = 2;
+        if (this.x > TankFrame.GAME_WIDTH - WIDTH - 3) this.x = TankFrame.GAME_WIDTH -WIDTH - 3;
+        if (this.y < 30) this.y = 30;
+        if (this.y > TankFrame.GAME_HEIGHT - HEIGHT - 3) this.y = TankFrame.GAME_HEIGHT -HEIGHT - 3;
     }
     private void randomDir(){
 
