@@ -11,19 +11,26 @@ import java.io.IOException;
  * @version: 1.0
  */
 public class ResourceMgr {
-    //定义坦克方向变量：
-    public static BufferedImage tankU, tankD, tankL, tankR;
+    //定义我方坦克方向变量：
+    public static BufferedImage goodTankU, goodTankD, goodTankL, goodTankR;
+    //定义敌方坦克方向变量：
+    public static BufferedImage badTankU, badTankD, badTankL, badTankR;
     //定义子弹方向变量：
     public static BufferedImage bulletU, bulletD, bulletL, bulletR;
     //定义爆炸数组
     public static BufferedImage[] explodes = new BufferedImage[9];
     static{
         try {
-            //导入坦克方向
-            tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
-            tankD = ImageUtil.rotateImage(tankU,180);
-            tankL = ImageUtil.rotateImage(tankU,-90);
-            tankR = ImageUtil.rotateImage(tankU,90);
+            //导入我方坦克方向
+            goodTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
+            goodTankD = ImageUtil.rotateImage(goodTankU,180);
+            goodTankL = ImageUtil.rotateImage(goodTankU,-90);
+            goodTankR = ImageUtil.rotateImage(goodTankU,90);
+            //导入敌方坦克方向
+            badTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/badTankU.gif"));
+            badTankD = ImageUtil.rotateImage(badTankU,180);
+            badTankL = ImageUtil.rotateImage(badTankU,-90);
+            badTankR = ImageUtil.rotateImage(badTankU,90);
             //导入子弹方向：
             bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
             bulletD = ImageUtil.rotateImage(bulletU,180);

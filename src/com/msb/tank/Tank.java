@@ -17,7 +17,7 @@ public class Tank {
     //坦克的速度
     private static final int SPEED = 1;
     //坦克的大小
-    public static int WIDTH = ResourceMgr.tankU.getWidth(), HEIGHT = ResourceMgr.tankU.getHeight();
+    public static int WIDTH = ResourceMgr.goodTankU.getWidth(), HEIGHT = ResourceMgr.goodTankU.getHeight();
     //坦克的移动状态
     private boolean moving = false;
     //创建随机数对象
@@ -49,23 +49,22 @@ public class Tank {
             tf.tanks.remove(this);
         }
         //根据方向换出坦克：
-        switch (dir){
+        switch (dir) {
             case UP:
-                g.drawImage(ResourceMgr.tankU, x, y,null);
+                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);//三元运算判断输出好坏坦克
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD, x, y,null);
+                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.tankL, x, y,null);
+                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR, x, y,null);
+                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
                 break;
             default:
                 break;
         }
-
         move();
 
     }
