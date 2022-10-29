@@ -24,7 +24,10 @@ public class Tank {
     private Random random = new Random();
     //坦克生存状态
     private boolean living = true;
+    //默认坦克阵营
     private Group group = Group.BAD;
+
+    Rectangle rect = new Rectangle();
     //引用TankFrame
     private TankFrame tf = null;
 
@@ -42,6 +45,11 @@ public class Tank {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -91,6 +99,7 @@ public class Tank {
             default:
                 break;
         }
+
         if (this.group == Group.BAD && random.nextInt(100) > 97 ){
             this.fire();
         }
@@ -98,6 +107,9 @@ public class Tank {
             randomDir();
 
         boundsCheck();
+
+        rect.x = this.x;
+        rect.y = this.y;
     }
     private void boundsCheck(){
         if (this.x < 2) this.x = 2;

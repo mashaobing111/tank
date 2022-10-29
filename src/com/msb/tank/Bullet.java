@@ -15,6 +15,7 @@ public class Bullet {
     public static int WIDTH = ResourceMgr.bulletU.getWidth(), HEIGHT = ResourceMgr.bulletU.getHeight();//子弹大小
     private  boolean living = true;//子弹状态
     private Group group = Group.BAD;//子弹队伍区分
+    Rectangle rect = new Rectangle();
     TankFrame tf = null;
     public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
@@ -22,6 +23,11 @@ public class Bullet {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
     public void paint(Graphics g){
         if (!living){//子弹消亡就移除
@@ -65,17 +71,18 @@ public class Bullet {
             default:
                 break;
         }
+        rect.x = this.x;
+        rect.y = this.y;
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;//设置边界 判断子弹是否超出边界
     }
 
     public void collideWith(Tank tank) {//碰撞检测
         if (this.group == tank.getGroup()) return;//判断子弹与坦克的阵营
-
-        Rectangle rect1 = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
-        if (rect1.intersects(rect2)){
+        //碰撞检测
+        if (rect.intersects(tank.rect)){
             tank.die();
             this.die();
+            //在坦克中心爆炸
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
             tf.explodes.add(new Explode(ex,ey,tf));
