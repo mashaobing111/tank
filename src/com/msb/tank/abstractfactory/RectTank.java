@@ -1,9 +1,8 @@
-package com.msb.tank;
+package com.msb.tank.abstractfactory;
 
-import com.msb.tank.abstractfactory.BaseTank;
+import com.msb.tank.*;
 
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Random;
  * @description: com.msb.tank
  * @version: 1.0
  */
-public class Tank extends BaseTank {
+public class RectTank extends BaseTank {
     //坦克的初始位置
     private int x, y;
     //坦克的初始方向
@@ -27,9 +26,10 @@ public class Tank extends BaseTank {
     private Random random = new Random();
     //坦克生存状态
     private boolean living = true;
+    //默认坦克阵营
+    private Group group = Group.BAD;
 
-
-
+    public Rectangle rect = new Rectangle();
 
 
     FireStrategy fs;
@@ -45,7 +45,7 @@ public class Tank extends BaseTank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectTank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -81,22 +81,10 @@ public class Tank extends BaseTank {
             tf.tanks.remove(this);
         }
         //根据方向换出坦克：
-        switch (dir) {
-            case UP:
-                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);//三元运算判断输出好坏坦克
-                break;
-            case DOWN:
-                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
-                break;
-            case LEFT:
-                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(this.group ==Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
-                break;
-            default:
-                break;
-        }
+        Color c = g.getColor();
+        g.setColor(group == Group.GOOD ? Color.red :Color.yellow);
+        g.fillRect(x,y,50,50);
+        g.setColor(c);
         move();
 
     }
@@ -157,8 +145,8 @@ public class Tank extends BaseTank {
     //坦克开火打出子弹
     public void fire() {
         //fs.fire(this);
-        int bx = this.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.getY() + Tank.HEIGHT /2 - Bullet.HEIGHT / 2;
+        int bx = this.getX() + RectTank.WIDTH / 2 - Bullet.WIDTH / 2;
+        int by = this.getY() + RectTank.HEIGHT /2 - Bullet.HEIGHT / 2;
 
         Dir[] dirs = Dir.values();
         for (Dir dir:dirs){

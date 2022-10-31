@@ -1,7 +1,6 @@
-package com.msb.tank;
+package com.msb.tank.abstractfactory;
 
-import com.msb.tank.abstractfactory.BaseBullet;
-import com.msb.tank.abstractfactory.BaseTank;
+import com.msb.tank.*;
 
 import java.awt.*;
 
@@ -11,7 +10,7 @@ import java.awt.*;
  * @description: com.msb.tank
  * @version: 1.0
  */
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
     private int x, y;//子弹位置
     private Dir dir;//子弹方向
     private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("bulletSpeed"));//子弹速度
@@ -20,7 +19,7 @@ public class Bullet extends BaseBullet {
     private Group group = Group.BAD;//子弹队伍区分
     Rectangle rect = new Rectangle();
     TankFrame tf = null;
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -40,7 +39,7 @@ public class Bullet extends BaseBullet {
             tf.bullets.remove(this);
         }
 
-        switch (dir){
+        /*switch (dir){
             case UP:
                 g.drawImage(ResourceMgr.bulletU,x ,y,null);
                 break;
@@ -55,8 +54,11 @@ public class Bullet extends BaseBullet {
                 break;
             default:
                 break;
-        }
-
+        }*/
+        Color c = g.getColor();
+        g.setColor(Color.white);
+        g.fillRect(x,y,20,20);
+        g.setColor(c);
 
         move();
     }

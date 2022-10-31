@@ -1,5 +1,7 @@
 package com.msb.tank;
 
+import com.msb.tank.abstractfactory.*;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,13 +23,15 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200,890,Dir.UP,Group.GOOD,this);
     //创建子弹集合
-    List<Bullet> bullets = new ArrayList<>();
+    public List<BaseBullet> bullets = new ArrayList<>();
     //创建敌方坦克集合
-    List<Tank> tanks = new ArrayList<>();
+    public List<BaseTank> tanks = new ArrayList<>();
     //创建坦克爆炸集合
-    List<Explode> explodes = new ArrayList<>();
+    public List<BaseExplode> explodes = new ArrayList<>();
 
-    static final int GAME_WIDTH = Integer.parseInt((String)PropertyMgr.get("gameWidth")), GAME_HEIGHT = Integer.parseInt((String)PropertyMgr.get("gameHeight"));//定义窗口大小
+    //初始化工厂
+    public GameFactory gf = new DefaultFactory();
+    public static final int GAME_WIDTH = Integer.parseInt((String)PropertyMgr.get("gameWidth")), GAME_HEIGHT = Integer.parseInt((String)PropertyMgr.get("gameHeight"));//定义窗口大小
 
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小

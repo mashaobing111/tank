@@ -19,7 +19,7 @@ public class Main {
         //创建敌方坦克：
         for (int i = 0; i < initTankCount; i++) {
             for (int j = 0; j < 1; j++) {
-                tf.tanks.add(new Tank(50 + i *100, 200 + j * 70, Dir.DOWN, Group.BAD, tf));
+                tf.tanks.add(tf.gf.createTank(50 + i *100, 200 + j * 70, Dir.DOWN, Group.BAD, tf));
             }
 
         }

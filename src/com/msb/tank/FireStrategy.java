@@ -1,5 +1,7 @@
 package com.msb.tank;
 
+import com.msb.tank.abstractfactory.BaseTank;
+
 /**
  * @author: msb
  * @date: 2022/10/30 - 10 - 30 - 15:23
