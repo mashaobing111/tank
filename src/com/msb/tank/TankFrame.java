@@ -27,7 +27,7 @@ public class TankFrame extends Frame {
     //创建坦克爆炸集合
     List<Explode> explodes = new ArrayList<>();
 
-    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;//定义窗口大小
+    static final int GAME_WIDTH = Integer.parseInt((String)PropertyMgr.get("gameWidth")), GAME_HEIGHT = Integer.parseInt((String)PropertyMgr.get("gameHeight"));//定义窗口大小
 
     public TankFrame() throws HeadlessException {
         //设置窗口初始大小

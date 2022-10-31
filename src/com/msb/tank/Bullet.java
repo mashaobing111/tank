@@ -11,7 +11,7 @@ import java.awt.*;
 public class Bullet {
     private int x, y;//子弹位置
     private Dir dir;//子弹方向
-    private static final int SPEED = 10;//子弹速度
+    private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("bulletSpeed"));//子弹速度
     public static int WIDTH = ResourceMgr.bulletU.getWidth(), HEIGHT = ResourceMgr.bulletU.getHeight();//子弹大小
     private  boolean living = true;//子弹状态
     private Group group = Group.BAD;//子弹队伍区分
@@ -28,6 +28,8 @@ public class Bullet {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        tf.bullets.add(this);
     }
     public void paint(Graphics g){
         if (!living){//子弹消亡就移除

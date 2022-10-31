@@ -1,6 +1,7 @@
 package com.msb.tank;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 /**
@@ -15,7 +16,7 @@ public class Tank {
     //坦克的初始方向
     private Dir dir = Dir.DOWN;
     //坦克的速度
-    private static final int SPEED = 3;
+    private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("tankSpeed"));
     //坦克的大小
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(), HEIGHT = ResourceMgr.goodTankU.getHeight();
     //坦克的移动状态
@@ -28,8 +29,12 @@ public class Tank {
     private Group group = Group.BAD;
 
     Rectangle rect = new Rectangle();
+
+
+    FireStrategy fs;
+
     //引用TankFrame
-    private TankFrame tf = null;
+     TankFrame tf = null;
 
     public boolean isMoving() {
         return moving;
@@ -50,6 +55,23 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+        if (this.group == Group.GOOD) {
+            String goodFSName = (String)PropertyMgr.get("goodFs");
+
+            try {
+                fs = (FireStrategy) Class.forName(goodFSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            String badFSName = (String)PropertyMgr.get("badFs");
+            try {
+                fs = (FireStrategy) Class.forName(badFSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void paint(Graphics g) {
@@ -132,9 +154,7 @@ public class Tank {
 
     //坦克开火打出子弹
     public void fire() {
-        int bx = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.y + HEIGHT /2 - Bullet.HEIGHT / 2;
-        tf.bullets.add(new Bullet(bx, by, this.dir,this.group, this.tf));
+        fs.fire(this);
     }
 
     public int getX() {
