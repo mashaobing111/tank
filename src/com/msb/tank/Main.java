@@ -15,14 +15,8 @@ public class Main {
         //创建窗口对象
         TankFrame tf = new TankFrame();
 
-        int initTankCount = Integer.parseInt((String)PropertyMgr.get("initTankCount"));
-        //创建敌方坦克：
-        for (int i = 0; i < initTankCount; i++) {
-            for (int j = 0; j < 1; j++) {
-                tf.tanks.add(new Tank(50 + i *100, 200 + j * 70, Dir.DOWN, Group.BAD, tf));
-            }
 
-        }
+
 
         while (true){
             //睡眠50ms

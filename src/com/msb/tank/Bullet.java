@@ -16,12 +16,12 @@ public class Bullet {
     private  boolean living = true;//子弹状态
     private Group group = Group.BAD;//子弹队伍区分
     Rectangle rect = new Rectangle();
-    TankFrame tf = null;
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    GameModel gm = null;
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         rect.x = this.x;
@@ -29,11 +29,11 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        tf.bullets.add(this);
+        gm.bullets.add(this);
     }
     public void paint(Graphics g){
         if (!living){//子弹消亡就移除
-            tf.bullets.remove(this);
+            gm.bullets.remove(this);
         }
 
         switch (dir){
@@ -87,7 +87,7 @@ public class Bullet {
             //在坦克中心爆炸
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tf.explodes.add(new Explode(ex,ey,tf));
+            gm.explodes.add(new Explode(ex,ey,gm));
         }
     }
 

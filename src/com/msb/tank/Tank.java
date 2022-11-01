@@ -33,8 +33,9 @@ public class Tank {
 
     FireStrategy fs;
 
+    GameModel gm;
     //引用TankFrame
-     TankFrame tf = null;
+
 
     public boolean isMoving() {
         return moving;
@@ -44,11 +45,11 @@ public class Tank {
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         rect.x = this.x;
@@ -76,7 +77,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if(!living) {
-            tf.tanks.remove(this);
+            gm.tanks.remove(this);
         }
         //根据方向换出坦克：
         switch (dir) {
