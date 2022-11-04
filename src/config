@@ -5,5 +5,7 @@ bulletSpeed=10
 gameWidth=1080
 gameHeight=960
 #fireStrategy
-goodFs=com.msb.tank.FourDirFireStrategy
-badFs=com.msb.tank.DefaultFireStrategy
+goodFs=com.msb.tank.strategy.FourDirFireStrategy
+badFs=com.msb.tank.strategy.DefaultFireStrategy
+#Colliders
+colliders=com.msb.tank.cor.BulletTankCollider,com.msb.tank.cor.TankTankCollider

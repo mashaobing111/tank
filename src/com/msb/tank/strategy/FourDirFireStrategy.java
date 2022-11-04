@@ -1,4 +1,9 @@
-package com.msb.tank;
+package com.msb.tank.strategy;
+
+import com.msb.tank.Bullet;
+import com.msb.tank.Dir;
+import com.msb.tank.Tank;
+
 
 /**
  * @author: msb

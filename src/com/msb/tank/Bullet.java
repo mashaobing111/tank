@@ -8,7 +8,7 @@ import java.awt.*;
  * @description: com.msb.tank
  * @version: 1.0
  */
-public class Bullet {
+public class Bullet extends GameObject{
     private int x, y;//子弹位置
     private Dir dir;//子弹方向
     private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("bulletSpeed"));//子弹速度
@@ -29,11 +29,11 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.bullets.add(this);
+        gm.add(this);
     }
     public void paint(Graphics g){
         if (!living){//子弹消亡就移除
-            gm.bullets.remove(this);
+            gm.remove(this);
         }
 
         switch (dir){
@@ -78,8 +78,8 @@ public class Bullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;//设置边界 判断子弹是否超出边界
     }
 
-    public void collideWith(Tank tank) {//碰撞检测
-        if (this.group == tank.getGroup()) return;//判断子弹与坦克的阵营
+    public boolean collideWith(Tank tank) {//碰撞检测
+        if (this.group == tank.getGroup()) return false;//判断子弹与坦克的阵营
         //碰撞检测
         if (rect.intersects(tank.rect)){
             tank.die();
@@ -87,8 +87,10 @@ public class Bullet {
             //在坦克中心爆炸
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.explodes.add(new Explode(ex,ey,gm));
+            gm.add(new Explode(ex,ey,gm));
+            return true;
         }
+        return false;
     }
 
     private void die() {//子弹死亡

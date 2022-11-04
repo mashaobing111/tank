@@ -1,7 +1,8 @@
 package com.msb.tank;
 
+import com.msb.tank.strategy.FireStrategy;
+
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 /**
@@ -10,30 +11,32 @@ import java.util.Random;
  * @description: com.msb.tank
  * @version: 1.0
  */
-public class Tank {
+public class Tank extends GameObject{
     //坦克的初始位置
-    private int x, y;
+    public int x, y ,oldX, oldY;
     //坦克的初始方向
-    private Dir dir = Dir.DOWN;
+    public Dir dir = Dir.DOWN;
     //坦克的速度
     private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("tankSpeed"));
     //坦克的大小
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(), HEIGHT = ResourceMgr.goodTankU.getHeight();
     //坦克的移动状态
-    private boolean moving = false;
+    private boolean moving = true;
     //创建随机数对象
     private Random random = new Random();
     //坦克生存状态
     private boolean living = true;
     //默认坦克阵营
-    private Group group = Group.BAD;
+    public Group group = Group.BAD;
+
+
 
     Rectangle rect = new Rectangle();
 
 
     FireStrategy fs;
 
-    GameModel gm;
+    public GameModel gm;
     //引用TankFrame
 
 
@@ -77,7 +80,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if(!living) {
-            gm.tanks.remove(this);
+            gm.remove(this);
         }
         //根据方向换出坦克：
         switch (dir) {
@@ -102,9 +105,8 @@ public class Tank {
     //移动方法
     private void move(){
         //如果移动状态为false 则跳出
-        if (this.group == Group.GOOD){
-            if (!moving) return;
-        }else if (moving) return;
+
+        if (!moving) return;
 
         switch (dir){
             case UP:
@@ -185,5 +187,14 @@ public class Tank {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+    public void stop(){
+        moving = false;
+
+
     }
 }
