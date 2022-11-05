@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Tank extends GameObject{
     //坦克的初始位置
-    public int x, y ,oldX, oldY;
+    public int oldX, oldY;
     //坦克的初始方向
     public Dir dir = Dir.DOWN;
     //坦克的速度
@@ -193,5 +193,14 @@ public class Tank extends GameObject{
     public void back(){
         x = oldX;
         y = oldY;
+    }
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }

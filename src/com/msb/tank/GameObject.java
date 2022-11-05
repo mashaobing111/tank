@@ -9,6 +9,8 @@ import java.awt.*;
  * @version: 1.0
  */
 public abstract class GameObject {//创建一个游戏物体的父类抽象
-    int x, y;
+    public int x, y;  //protected ：子类能使用父类属性
     public abstract void paint(Graphics g);
+    public abstract int getWidth();
+    public abstract int getHeight();
 }

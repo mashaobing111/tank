@@ -9,7 +9,6 @@ import java.awt.*;
  * @version: 1.0
  */
 public class Bullet extends GameObject{
-    private int x, y;//子弹位置
     private Dir dir;//子弹方向
     private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("bulletSpeed"));//子弹速度
     public static int WIDTH = ResourceMgr.bulletU.getWidth(), HEIGHT = ResourceMgr.bulletU.getHeight();//子弹大小
@@ -88,5 +87,15 @@ public class Bullet extends GameObject{
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }
