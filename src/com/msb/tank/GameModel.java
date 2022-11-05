@@ -16,8 +16,15 @@ import java.util.List;
  * @version: 1.0
  */
 public class GameModel {
+
+    //单例：
+    private static final  GameModel INSTANCE = new GameModel();
+
+    static {
+        INSTANCE.init();
+    }
     //创建我方坦克
-    Tank myTank = new Tank(200,890,Dir.UP,Group.GOOD,this);
+    Tank myTank;
 
     //创建碰撞器链表
     ColliderChain chain = new ColliderChain();
@@ -32,17 +39,37 @@ public class GameModel {
     //创建游戏物体对象
     private List<GameObject> objects = new ArrayList<>();
 
+    public static  GameModel getInstance(){
+        return INSTANCE;
+    }
     //构造游戏模型
-    public GameModel() {
+    private GameModel() {
+
+    }
+
+    private void init(){
+        //初始化主战坦克
+        myTank = new Tank(200,890,Dir.UP,Group.GOOD);
+
         //获取配置文件敌方坦克数量
         int initTankCount = Integer.parseInt((String)PropertyMgr.get("initTankCount"));
         //创建敌方坦克：
         for (int i = 0; i < initTankCount; i++) {
             for (int j = 0; j < 1; j++) {
-                add(new Tank(50 + i *100, 200 + j * 70, Dir.DOWN, Group.BAD, this));
+                new Tank(50 + i *100, 200 + j * 70, Dir.DOWN, Group.BAD);
             }
 
         }
+        //初始化墙
+        add(new Wall(150,150,300,50));
+        add(new Wall(550,150,300,50));
+        add(new Wall(150,650,300,50));
+        add(new Wall(550,650,300,50));
+        for (int i = 0; i < 6; i++) {
+            add(new Wall(100 + i*160,300,50,250));
+        }
+
+
     }
 
     public void add(GameObject go){

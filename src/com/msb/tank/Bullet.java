@@ -14,14 +14,14 @@ public class Bullet extends GameObject{
     private static final int SPEED = Integer.parseInt((String)PropertyMgr.get("bulletSpeed"));//子弹速度
     public static int WIDTH = ResourceMgr.bulletU.getWidth(), HEIGHT = ResourceMgr.bulletU.getHeight();//子弹大小
     private  boolean living = true;//子弹状态
-    private Group group = Group.BAD;//子弹队伍区分
-    Rectangle rect = new Rectangle();
-    GameModel gm = null;
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Group group = Group.BAD;//子弹队伍区分
+    public Rectangle rect = new Rectangle();
+
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
+
         this.group = group;
 
         rect.x = this.x;
@@ -29,11 +29,11 @@ public class Bullet extends GameObject{
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.add(this);
+        GameModel.getInstance().add(this);
     }
     public void paint(Graphics g){
         if (!living){//子弹消亡就移除
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
         switch (dir){
@@ -78,22 +78,7 @@ public class Bullet extends GameObject{
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;//设置边界 判断子弹是否超出边界
     }
 
-    public boolean collideWith(Tank tank) {//碰撞检测
-        if (this.group == tank.getGroup()) return false;//判断子弹与坦克的阵营
-        //碰撞检测
-        if (rect.intersects(tank.rect)){
-            tank.die();
-            this.die();
-            //在坦克中心爆炸
-            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.add(new Explode(ex,ey,gm));
-            return true;
-        }
-        return false;
-    }
-
-    private void die() {//子弹死亡
+    public void die() {//子弹死亡
         this.living = false;
     }
 

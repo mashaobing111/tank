@@ -8,4 +8,4 @@ gameHeight=960
 goodFs=com.msb.tank.strategy.FourDirFireStrategy
 badFs=com.msb.tank.strategy.DefaultFireStrategy
 #Colliders
-colliders=com.msb.tank.cor.BulletTankCollider,com.msb.tank.cor.TankTankCollider
+colliders=com.msb.tank.cor.BulletTankCollider,com.msb.tank.cor.TankTankCollider,com.msb.tank.cor.BulletWallCollider

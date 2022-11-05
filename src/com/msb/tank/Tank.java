@@ -29,16 +29,9 @@ public class Tank extends GameObject{
     //默认坦克阵营
     public Group group = Group.BAD;
 
-
-
-    Rectangle rect = new Rectangle();
-
+    public Rectangle rect = new Rectangle();
 
     FireStrategy fs;
-
-    public GameModel gm;
-    //引用TankFrame
-
 
     public boolean isMoving() {
         return moving;
@@ -48,11 +41,10 @@ public class Tank extends GameObject{
         this.moving = moving;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
 
         rect.x = this.x;
@@ -76,11 +68,12 @@ public class Tank extends GameObject{
                 e.printStackTrace();
             }
         }
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g) {
         if(!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         //根据方向换出坦克：
         switch (dir) {
@@ -104,8 +97,11 @@ public class Tank extends GameObject{
     }
     //移动方法
     private void move(){
-        //如果移动状态为false 则跳出
 
+        //记录坦克移动之前的位置
+        oldX = x;
+        oldY = y;
+        //如果移动状态为false 则跳出
         if (!moving) return;
 
         switch (dir){
@@ -192,9 +188,10 @@ public class Tank extends GameObject{
     public Rectangle getRect() {
         return rect;
     }
-    public void stop(){
-        moving = false;
 
-
+    //坦克相撞后回到上一次的位置
+    public void back(){
+        x = oldX;
+        y = oldY;
     }
 }
