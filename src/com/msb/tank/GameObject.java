@@ -1,6 +1,7 @@
 package com.msb.tank;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * @author: msb
@@ -8,7 +9,7 @@ import java.awt.*;
  * @description: com.msb.tank
  * @version: 1.0
  */
-public abstract class GameObject {//创建一个游戏物体的父类抽象
+public abstract class GameObject implements Serializable {//创建一个游戏物体的父类抽象
     public int x, y;  //protected ：子类能使用父类属性
     public abstract void paint(Graphics g);
     public abstract int getWidth();

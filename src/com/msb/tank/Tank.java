@@ -1,8 +1,13 @@
 package com.msb.tank;
 
+import com.msb.tank.observer.TankFireEvent;
+import com.msb.tank.observer.TankFireHandler;
+import com.msb.tank.observer.TankFireObserver;
 import com.msb.tank.strategy.FireStrategy;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -31,7 +36,7 @@ public class Tank extends GameObject{
 
     public Rectangle rect = new Rectangle();
 
-    FireStrategy fs;
+    /*transient*/ FireStrategy fs;
 
     public boolean isMoving() {
         return moving;
@@ -69,6 +74,7 @@ public class Tank extends GameObject{
             }
         }
         GameModel.getInstance().add(this);
+
     }
 
     public void paint(Graphics g) {
@@ -202,5 +208,13 @@ public class Tank extends GameObject{
     @Override
     public int getHeight() {
         return HEIGHT;
+    }
+
+    private List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandler());
+    private void handleFireKey(){
+        TankFireEvent event = new TankFireEvent(this);
+        for (TankFireObserver o : fireObservers){
+            o.actionOnFire(event);
+        }
     }
 }
